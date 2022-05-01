@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+          />
+  
+          <mat-error *ngIf="form.hasError('required', 'username')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'username')">
+            Debe tener al menos 5 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'username')">
+            Debe tener 30 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" row="5" type="password" autocomplete="off"/>
+  
+          <mat-error *ngIf="form.hasError('required', 'password')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'password')">
+            Debe tener al menos 8 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'password')">
+            Debe tener 150 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Nombres</mat-label>
+            <input matInput type="text" placeholder="Nombres" formControlName="nombre" />
+
+            <mat-error *ngIf="form.hasError('required', 'nombre')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+                Debe tener al menos 2 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+                Debe tener 25 caracteres como máximo
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Apellidos</mat-label>
+            <input matInput type="text" placeholder="Apellidos" formControlName="apellido" />
+
+            <mat-error *ngIf="form.hasError('required', 'apellido')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'apellido')">
+                Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'apellido')">
+                Debe tener 50 caracteres como máximo
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>DNI</mat-label>
+            <input matInput type="text" placeholder="DNI" formControlName="dni" />
+
+            <mat-error *ngIf="form.hasError('required', 'dni')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'dni')">
+                Debe tener 8 caracteres como máximo
+            </mat-error>
+        </mat-form-field>
+  
+        <a routerLink="/auth">¿Ya tienes cuenta? Inicia Sesión</a>
+
+       <br /><br />
+        <button type="button" mat-button routerLink="/">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  

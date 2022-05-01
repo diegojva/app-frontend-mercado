@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <span>Vendedor</span>
+
+  <button mat-button routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2"><mat-icon>pets icon</mat-icon>&nbsp;Puestos</button>
+  <button mat-button routerLink="/admin/vendedor/sectores" class="ms-2"><mat-icon>receipt icon</mat-icon>&nbsp;Sectores</button>
+  <button mat-button routerLink="/admin/vendedor/unidades-medidas" class="ms-2"><mat-icon>receipt icon</mat-icon>&nbsp;Unidades Medidas</button>
+
+  <span class="spacer"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu" style="text-transform: uppercase;">
+    {{dataSource?.nombre}} {{dataSource?.apellido}} <mat-icon>account_circle</mat-icon> 
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="signOut()">
+      <mat-icon>logout</mat-icon> Cerrar sesión
+    </button>
+
+    <button mat-menu-item routerLink="/admin/reportes">
+      <mat-icon>report</mat-icon> Ayuda
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div class="container p-5">
+  <router-outlet></router-outlet>
+</div>
+
+

@@ -1,0 +1,115 @@
+<h3 class="fw-bold" style="text-transform: uppercase;">SECTOR => [{{dataSourceSector?.['sector']['nombre']}}]</h3>
+
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" row="5"  />
+  
+          <mat-error *ngIf="form.hasError('required', 'nombre')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+            Debe tener al menos 11 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+            Debe tener 30 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Precio</mat-label>
+            <input matInput formControlName="precio" row="5" type="number"  />
+    
+            <mat-error *ngIf="form.hasError('required', 'precio')">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock" row="5" type="number"  />
+    
+            <mat-error *ngIf="form.hasError('required', 'stock')">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+
+          <!--<mat-form-field appearance="outline" class="d-block">
+            <mat-label>Unidad de Medida</mat-label>
+            <input matInput formControlName="unidadMedida" row="5" />
+    
+            <mat-error *ngIf="form.hasError('required', 'unidadMedida')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'unidadMedida')">
+              Debe tener al menos 11 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'unidadMedida')">
+              Debe tener 255 caracteres como máximo
+            </mat-error>
+          </mat-form-field>-->
+
+          <mat-form-field appearance="fill"  *ngFor="let unidades of unidades_medidas; let i = index">
+            <mat-label>Unidades de Medidas</mat-label>
+            <mat-select formControlName="unidadMedida">
+              <mat-option *ngFor="let nombres of unidades" [value]="nombres">
+                {{nombres.abreviatura}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+
+         <!--<mat-form-field appearance="fill"  *ngFor="let sector of sectores; let i = index">
+            <mat-label>Sector</mat-label>
+            <mat-select formControlName="sector">
+              <mat-option *ngFor="let nombres of sector" [value]="nombres">
+                {{nombres.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>-->
+
+          <!--<mat-form-field appearance="outline" class="d-block" >
+            <mat-label>Sector</mat-label>
+            <input matInput formControlName="sector" row="5" readonly="true" value="  {{dataSourceSector?.['id']}}" />
+          
+            <mat-error *ngIf="form.hasError('required', 'sector')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'sector')">
+              Debe tener al menos 11 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'sector')">
+              Debe tener 255 caracteres como máximo
+            </mat-error>
+          </mat-form-field>-->
+
+        <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
+
+       <br />
+        <button type="button" mat-button routerLink="/admin/vendedor/puestos/lista-productos">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+          
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  
