@@ -12,6 +12,7 @@ export class EditarProductoComponent implements OnInit {
 
   private id: number;
   private id_puesto: any;
+  private id_sector: any;
   public producto:Producto;
 
   constructor(private productoService: ProductoService,
@@ -22,6 +23,7 @@ export class EditarProductoComponent implements OnInit {
       this.productoService.get(this.id).subscribe((data:any)=>{
         this.producto=data;
         this.id_puesto=data.puesto;
+        this.id_sector=data.sector;
       });
    })
   }
@@ -33,6 +35,7 @@ export class EditarProductoComponent implements OnInit {
   actualizarProducto(producto:Producto){
     producto.id = this.id;
     producto.puesto = this.id_puesto;
+    producto.sector= this.id_sector;
     this.productoService.update(producto).subscribe(()=>{
       this.router.navigate(['/admin/vendedor/puestos/lista-producto']);
     }, (error: any) => {

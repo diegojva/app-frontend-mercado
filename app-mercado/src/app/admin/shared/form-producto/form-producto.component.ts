@@ -23,7 +23,7 @@ export class FormProductoComponent implements OnInit {
   public sectores : Array<any> = [];
   public unidades_medidas : Array<any> = [];
   public dataSourcePuesto:any;
-  dataSource : any;
+  //dataSource : any;
   dataSourceSector: any;
 
   form: FormGroup;
@@ -37,7 +37,6 @@ export class FormProductoComponent implements OnInit {
 
 
   constructor(private productoService: ProductoService,
-    private sectorService: SectorService,
     private formBuilder: FormBuilder,
     private unidadMedida: UnidadMedidaService,
     private activatedRoute: ActivatedRoute,
@@ -50,6 +49,10 @@ export class FormProductoComponent implements OnInit {
           }
         )
      })
+     
+     this.cargarUnidadesMedidas();
+     this.verificarId();
+     this.getSectorByPuestoId();
     }
 
   ngOnInit(): void {
@@ -69,9 +72,6 @@ export class FormProductoComponent implements OnInit {
 
     });
     //this.cargarSectores();
-    this.cargarUnidadesMedidas();
-    //this.getSectorByPuestoId();
-    this.getSectorByPuestoId();
   }
 
   registrar() {
@@ -89,18 +89,19 @@ export class FormProductoComponent implements OnInit {
    })
   }
 
-  /*cargarSectores(){
-    this.sectorService.getSectores().subscribe(
-      (data:any)=>{
-        this.sectores.push(data);
-      },
-      (err: any)=> {
-        console.log(err);
-      }
-    );
-  }*/
+  verificarId(){
+    if(this.id==0){
+      this.activeRoute.paramMap.subscribe(paramMap =>{
+        this.id = Number(paramMap.get('id'));
+        console.log(this.id);
+     })
+    }
+  }
 
   cargarUnidadesMedidas(){
+    if(this.id==null){
+      
+    }
     this.unidadMedida.getUnidadesMedidas().subscribe(
       (data:any)=>{
         this.unidades_medidas.push(data);
