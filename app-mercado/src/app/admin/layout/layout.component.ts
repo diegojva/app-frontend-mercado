@@ -18,22 +18,31 @@ export class LayoutComponent implements OnInit {
   public vendedor: Vendedor;
   dataSource: any;
 
+  first_name: string;
+  last_name: string;
+
 
   constructor(
     private router: Router,
     private usuarioService: LoginService,
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
     LayoutComponent.auth=false;
     this.getUsuarioPorId();
+
   }
 
   getUsuarioPorId(){
     this.usuarioService.getVendedor(Number(sessionStorage.getItem('idUsuario'))).subscribe((data:any) => {
       this.dataSource = data;
+      this.first_name = this.dataSource?.['nombre'].split(" ");
+      this.last_name = this.dataSource?.['apellido'].split(" ");
     });
   }
+  
 
   mostrarDatos(){
     console.log(this.dataSource);

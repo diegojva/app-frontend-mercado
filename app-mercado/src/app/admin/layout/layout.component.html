@@ -1,29 +1,53 @@
 <mat-toolbar color="primary">
-  <span>Vendedor</span>
 
-  <button mat-button routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2"><mat-icon>pets icon</mat-icon>&nbsp;Puestos</button>
-  <button mat-button routerLink="/admin/vendedor/sectores" class="ms-2"><mat-icon>receipt icon</mat-icon>&nbsp;Sectores</button>
-  <button mat-button routerLink="/admin/vendedor/unidades-medidas" class="ms-2"><mat-icon>receipt icon</mat-icon>&nbsp;Unidades Medidas</button>
+  <button id="ocultar" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu  #menu="matMenu">
+    <button style="font-size:13px;" mat-menu-item routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2">
+      <mat-icon  >pets icon</mat-icon>&nbsp;Puestos
+      <br>
+    </button>
+    <button style="font-size:13px;"mat-menu-item routerLink="/admin/vendedor/sectores" class="ms-2">
+      <mat-icon >receipt icon</mat-icon>&nbsp;Sectores
+      <br>
+    </button>
+    <button style="font-size:13px;"mat-menu-item routerLink="/admin/vendedor/unidades-medidas" class="ms-2">
+      <mat-icon>receipt icon</mat-icon>&nbsp;Unidades Medidas
+    </button>
+  </mat-menu>
+
+  <span id="title-vendedor">Vendedor</span>
+
+  <div id="mostrar">
+    <button mat-button routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2">
+      <mat-icon id="icon-mostrar">pets icon</mat-icon>&nbsp;Puestos
+    </button>
+    <button mat-button routerLink="/admin/vendedor/sectores" class="ms-2">
+      <mat-icon id="icon-mostrar">receipt icon</mat-icon>&nbsp;Sectores
+    </button>
+    <button mat-button routerLink="/admin/vendedor/unidades-medidas" class="ms-2">
+      <mat-icon id="icon-mostrar">receipt icon</mat-icon>&nbsp;Unidades Medidas
+    </button>
+  </div>
 
   <span class="spacer"></span>
 
-  <button mat-button [matMenuTriggerFor]="menu" style="text-transform: uppercase;">
-    {{dataSource?.nombre}} {{dataSource?.apellido}} <mat-icon>account_circle</mat-icon> 
+
+
+  <button id="second-menu" mat-button [matMenuTriggerFor]="menu1" style="text-transform: uppercase;">
+    {{first_name?.['0']}} {{last_name?.['0']}} <mat-icon>account_circle</mat-icon> 
   </button>
 
-  <mat-menu #menu="matMenu">
+  <mat-menu #menu1="matMenu">
     <button mat-menu-item (click)="signOut()">
       <mat-icon>logout</mat-icon> Cerrar sesión
     </button>
 
-    <button mat-menu-item routerLink="/admin/reportes">
-      <mat-icon>report</mat-icon> Ayuda
-    </button>
   </mat-menu>
+
 </mat-toolbar>
 
 <div class="container p-5">
   <router-outlet></router-outlet>
 </div>
-
-
