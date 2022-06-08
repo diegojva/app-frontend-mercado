@@ -1,0 +1,67 @@
+<mat-toolbar color="warn">
+    <button
+      id="ocultar"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon><mat-icon>menu</mat-icon></mat-icon>
+    </button>
+  
+    <button mat-button routerLink="/despachador" >Despachador</button>
+  
+    <mat-menu #menu="matMenu">
+      <button
+        style="font-size: 13px"
+        mat-menu-item
+        routerLink="/despachador/mercados"
+        class="ms-2"
+      >
+        <mat-icon style="display: none">receipt icon</mat-icon>Mercados
+        <br />
+      </button>
+      <button
+        style="font-size: 13px"
+        mat-menu-item
+        routerLink="/despachador/ordenes/atendidas"
+        class="ms-2"
+      >
+        <mat-icon style="display: none">receipt icon</mat-icon>Ordenes
+      </button>
+    </mat-menu>
+  
+    <!--<span id="title-vendedor">Vendedor</span>-->
+  
+    <div id="mostrar">
+      <button mat-button routerLink="/despachador/mercados" class="ms-2">
+        <mat-icon id="icon-mostrar">view_module</mat-icon>&nbsp;Mercados
+      </button>
+      <button mat-button routerLink="/despachador/ordenes/atendidas" class="ms-2">
+        <mat-icon id="icon-mostrar">explore</mat-icon>&nbsp;Ordenes
+      </button>
+    </div>
+  
+    <span class="spacer"></span>
+  
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu2"
+      style="text-transform: uppercase"
+    >
+    {{ despachador?.nombre }} <mat-icon>account_circle</mat-icon>
+    </button>
+  
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item (click)="signOut()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+  
+      <button mat-menu-item routerLink="/admin/reportes">
+        <mat-icon>report</mat-icon> Ayuda
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <div class="container p-5">
+    <router-outlet></router-outlet>
+  </div>
+  

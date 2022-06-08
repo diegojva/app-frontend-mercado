@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+        <br />
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'nombre')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+            Debe tener al menos 3 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+            Debe tener 30 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Distrito</mat-label>
+          <input matInput formControlName="distrito" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'distrito')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'distrito')">
+            Debe tener al menos 3 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'distrito')">
+            Debe tener 30 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="ubicacion" row="5" />
+        
+            <mat-error *ngIf="form.hasError('required', 'ubicacion')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'ubicacion')">
+                Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'ubicacion')">
+                Debe tener 70 caracteres como máximo
+            </mat-error>
+        </mat-form-field>
+  
+        <br />
+        <button type="button" mat-button routerLink="/master/adm/lista-mercados">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  

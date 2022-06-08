@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+        <br />
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Abreviatura</mat-label>
+          <input matInput formControlName="abreviatura" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'abreviatura')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'abreviatura')">
+            Debe tener al menos 3 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'abreviatura')">
+            Debe tener 5 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Descripción</mat-label>
+          <input matInput formControlName="descripcion" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'descripcion')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'descripcion')">
+            Debe tener al menos 3 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'descripcion')">
+            Debe tener 50 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+  
+        <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
+  
+        <br />
+        <button type="button" mat-button routerLink="/master/adm/lista-unidades-medidas">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  

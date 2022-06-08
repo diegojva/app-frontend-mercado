@@ -1,0 +1,77 @@
+<div class="row">
+    <h3 style="font-weight: bold;">ACTUALIZA EL ESTADO</h3>
+    <div class="col-md-offset-3 mx-auto">
+        <form (ngSubmit)="actualizarEstadoPedido(form.value)" autocomplete="off" [formGroup]="form" #frmLibro="ngForm">
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>ID PEDIDO</mat-label>
+                <input matInput formControlName="id" row="5" readonly />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>CLIENTE</mat-label>
+                <input matInput formControlName="cliente" row="5" readonly />
+            </mat-form-field>
+
+            <p><strong>Información pedido</strong></p>
+            <ul *ngFor="let person of items">
+                <li>
+                    Productos: {{ person.producto.nombre }}
+                </li>
+            </ul>
+            -Puesto: {{ items[0]?.producto.puesto.nombre }}<br>
+            -Mercado: {{ items[0]?.producto.puesto.mercado.nombre }}<br>
+            -Sector: {{ items[0]?.producto.puesto.sector.nombre }}<br>
+            -Vendedor: {{ items[0]?.producto.puesto.vendedor.nombre }}<br>
+
+            <br>
+
+            <mat-form-field appearance="fill">
+                <mat-select formControlName="estado">
+                    <mat-option value="ATENDIDO">ATENDIDO</mat-option>
+                    <mat-option value="ARMADO">ARMADO</mat-option>
+                    <mat-option value="EN CAMINO">EN CAMINO</mat-option>
+                    <mat-option value="CANCELADO">CANCELADO</mat-option>
+                    <mat-option value="SIN ATENDER">SIN ATENDER</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.hasError('required', 'estado')">
+                    Este campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <br>
+
+            <!--<mat-form-field appearance="fill" >
+          <mat-label>Despachadores hoy</mat-label>
+          <mat-select formControlName="despachador" [(value)]="selected">
+            <mat-option  *ngFor="let d of despachadores" [value]="d">
+              <h5 style="text-transform: uppercase; margin: auto;">{{d.nombre}} - {{d.estado}}</h5>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <p><strong>Despachador escogido</strong></p>
+        <p>- Nombre: {{selected.nombre}}</p>
+        <p>- Apellido: {{selected.apellido}}</p> 
+        <p>- DNI: {{selected.dni}}</p>
+        <p>- Estado: {{selected.estado}}</p>-->
+
+            <!--<mat-form-field appearance="fill" >
+          <mat-select formControlName="estado"  >
+            <mat-option value="ATENDIDO" >ATENDIDO</mat-option>
+            <mat-option value="SIN ATENDER">SIN ATENDER</mat-option>
+            <mat-option value="CANCELADO">CANCELADO</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.hasError('required', 'estado')">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>-->
+
+            <button type="button" mat-button routerLink="/despachador">
+                Cancelar
+            </button>
+
+            <button mat-raised-button color="primary" type="submit" class="ms-2" [disabled]="frmLibro.invalid">
+                Guardar
+            </button>
+        </form>
+    </div>
+</div>

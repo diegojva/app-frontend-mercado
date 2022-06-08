@@ -30,7 +30,10 @@ export class ProductoService {
   }
 
   get(id: number) {
-    return this.http.get(`${this.apiBase}/productos/${id}`);
+    return this.http.get<Producto[]>(`${this.apiBase}/productos/${id}`);
   }
 
+  getAllProductos(){
+    return this.http.get<Producto[]>(`${this.apiBase}/productos`);
+  }
 }

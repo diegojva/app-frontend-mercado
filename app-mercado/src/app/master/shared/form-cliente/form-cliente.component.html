@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+        <br />
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'nombre')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+            Debe tener al menos 5 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+            Debe tener 25 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" row="5" />
+    
+            <mat-error *ngIf="form.hasError('required', 'apellido')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'apellido')">
+              Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'apellido')">
+              Debe tener 50 caracteres como máximo
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" row="5" />
+    
+            <mat-error *ngIf="form.hasError('required', 'email')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'email')">
+              Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'email')">
+              Debe tener 60 caracteres como máximo
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Teléfono</mat-label>
+            <input matInput type="text" placeholder="telefono" formControlName="telefono" />
+
+            <mat-error *ngIf="form.hasError('required', 'telefono')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'telefono')">
+                Debe tener 9 caracteres como máximo
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'telefono')">
+                Debe tener 9 caracteres como minímo
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Dirección</mat-label>
+            <input matInput type="text" placeholder="direccion" formControlName="direccion" />
+
+            <mat-error *ngIf="form.hasError('required', 'direccion')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'direccion')">
+                Debe tener 5 caracteres como máximo
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'direccion')">
+                Debe tener 120 caracteres como minímo
+            </mat-error>
+        </mat-form-field>
+
+
+        <!--<mat-form-field appearance="fill" *ngFor="let rol of roles; let i = index">
+          <mat-label>Roles</mat-label>
+          <mat-select formControlName="roles" multiple>
+            <mat-option *ngFor="let r of rol" [value]="r">{{r.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>-->
+
+        <!--<mat-form-field appearance="fill" *ngFor="let rol of roles; let i = index">
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roles">
+          <mat-option *ngFor="let r of rol" [value]="r">
+            {{ r.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>-->
+  
+        <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
+        <button type="button" mat-button routerLink="/master">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  

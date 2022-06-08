@@ -85,3 +85,28 @@ $hampcode-theme: mat.define-light-theme(
   font-size: 120%;
   display: inline-block;
 }
+.blue-snackbar {
+  background: #3f51b5;
+}
+.blue-snackbar span{
+  color: #ffffff;
+}
+.orange-snackbar {
+  background: #f44336;
+}
+.orange-snackbar span{
+  color: #ffffff;
+}
+.white-snackbar {
+  background: whitesmoke;
+}
+.white-snackbar span{
+  color: #000000;
+}
+
+.blue-snackbar-error {
+  background: #b10c06;
+}
+.blue-snackbar-error span{
+  color: #ffffff;
+}

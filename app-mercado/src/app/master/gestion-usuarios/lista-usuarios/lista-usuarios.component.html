@@ -1,0 +1,267 @@
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">person_3</mat-icon>
+        Vendedores
+      </ng-template>
+      <br>
+      <div class="example-header">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Buscar Vendedor"
+          />
+        </mat-form-field>
+      </div>
+      
+      <div class="container-table">
+        <table
+          mat-table
+          [dataSource]="dataSourceVendedores"
+          matSort
+          class="mat-elevation-z8"
+          class="w-100"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+            <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+            <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+            <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+          </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acción</th>
+        
+              <td mat-cell *matCellDef="let element">
+                <button
+                mat-button
+                title="Editar"
+                alt="Editar"
+                [routerLink]="[
+                  '/master/adm/vendedor/',
+                  element.id,
+                  'editar'
+                ]"
+              >
+              <mat-icon>ballot</mat-icon>
+              </button>
+                <button
+                mat-button
+                (click)="eliminar(element.id)"
+                title="Eliminar"
+                alt="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              </td>
+            </ng-container>
+        
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsVendedores"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsVendedores"></tr>
+        </table>
+      </div>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">delivery_dining</mat-icon>
+        Despachadores
+      </ng-template>
+      <br>
+      <div class="example-header">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilterDespachador($event.target.value)"
+            placeholder="Buscar Despachador"
+          />
+        </mat-form-field>
+      </div>
+      
+      <div class="container-table">
+        <table
+          mat-table
+          [dataSource]="dataSourceDespachadores"
+          matSort
+          class="mat-elevation-z8"
+          class="w-100"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+            <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+            <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+            <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+          </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acción</th>
+        
+              <td mat-cell *matCellDef="let element">
+                <button
+                mat-button
+                title="Editar"
+                alt="Editar"
+                [routerLink]="[
+                '/master/adm/despachador/',
+                element.id,
+                'editar'
+                ]"
+              >
+              <mat-icon>ballot</mat-icon>
+              </button>
+                <button
+                mat-button
+                (click)="eliminarDespachador(element.id)"
+                title="Eliminar"
+                alt="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              </td>
+            </ng-container>
+        
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsDespachadores"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsDespachadores"></tr>
+        </table>
+      </div>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">groups</mat-icon>
+        Clientes
+      </ng-template>
+      <br>
+      <div class="example-header">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilterClientes($event.target.value)"
+            placeholder="Buscar Cliente"
+          />
+        </mat-form-field>
+      </div>
+      
+      <div class="container-table">
+        <table
+          mat-table
+          [dataSource]="dataSourceClientes"
+          matSort
+          class="mat-elevation-z8"
+          class="w-100"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+            <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+            <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
+            <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+          </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acción</th>
+        
+              <td mat-cell *matCellDef="let element">
+                <button
+                mat-button
+                title="Editar"
+                alt="Editar"
+                [routerLink]="[
+                '/master/adm/cliente/',
+                element.id,
+                'editar'
+                ]"
+              >
+              <mat-icon>ballot</mat-icon>
+              </button>
+                <button
+                mat-button
+                (click)="eliminarCliente(element.id)"
+                title="Eliminar"
+                alt="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              </td>
+            </ng-container>
+        
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes"></tr>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  

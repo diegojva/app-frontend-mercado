@@ -20,12 +20,24 @@ export class PuestoService {
     return this.http.delete(`${this.apiBase}/puestos/${id}`);
   }
 
+  update(puesto: Puesto) {
+    return this.http.put(`${this.apiBase}/puestos`, puesto);
+  }
+
   create(puesto: Puesto) {
     return this.http.post(`${this.apiBase}/puestos`, puesto);
   }
 
   getPuestoById(id: number){
     return this.http.get<Puesto[]>(`${this.apiBase}/puestos/${id}`);
+  }
+
+  getPuestosByIdMercado(id: number){
+    return this.http.get<Puesto[]>(`${this.apiBase}/puestos/mis-puestos/by-mercado/${id}`);
+  }
+
+  getPuestosByIdMercadoAndEstado(id: number, estado: string){
+    return this.http.get<Puesto[]>(`${this.apiBase}/puestos/mis-puestos/by-mercadoId/${id}/and/by-estado/${estado}`);
   }
 
 }

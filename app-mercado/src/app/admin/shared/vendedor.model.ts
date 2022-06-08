@@ -4,5 +4,5 @@ export class Vendedor {
     nombre: string;
     apellido: string;
     dni: string;
-
+    roles?:string[];
 }

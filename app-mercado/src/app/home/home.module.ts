@@ -6,16 +6,25 @@ import { LayoutComponent } from './layout/layout.component';
 import { MaterialModule } from '../material/material.module';
 import { IndexComponent } from './index/index.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeProductsComponent } from './home-products/home-products.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    IndexComponent
+    IndexComponent,
+    HomeProductsComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule
+
   ]
 })
 export class HomeModule { }

@@ -1,0 +1,76 @@
+<h3 class="fw-bold" >Lista de sectores</h3>
+
+<!--<div class="text-end">
+  <button
+    class="new-rol"
+    mat-raised-button
+    routerLink="/master/adm/rol/nuevo-rol"
+    title="Nueva Rol"
+  >
+    <mat-icon>add</mat-icon>&nbsp; Nuevo Rol
+  </button>
+</div>-->
+
+<div class="example-header">
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Buscar Rol"
+    />
+  </mat-form-field>
+</div>
+
+<div>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8"
+    class="w-100"
+  >
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+    </ng-container>
+
+      <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef>Acción</th>
+  
+        <td mat-cell *matCellDef="let element">
+          <button
+          mat-button
+          title="Editar"
+          alt="Editar"
+          [routerLink]="[
+            '/master/adm/rol/',
+            element.id,
+            'editar'
+          ]"
+        >
+        <mat-icon>ballot</mat-icon>
+        </button>
+          <button
+          mat-button
+          (click)="eliminar(element.id)"
+          title="Eliminar"
+          alt="Eliminar"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        </td>
+      </ng-container>
+  
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<div class="container">
+  <p>Se debe tener cuidado con cualquier operación, puesto que afectará a los usuarios.</p>
+</div>

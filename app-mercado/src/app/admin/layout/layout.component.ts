@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { NuevaSesionComponent } from 'src/app/auth/login/nueva-sesion/nueva-sesion.component';
 import { DatosService } from 'src/app/auth/shared/datos.service';
 import { LoginService } from 'src/app/auth/shared/login.service';
@@ -17,32 +18,22 @@ export class LayoutComponent implements OnInit {
   public id :number;
   public vendedor: Vendedor;
   dataSource: any;
-
-  first_name: string;
-  last_name: string;
-
-
   constructor(
     private router: Router,
     private usuarioService: LoginService,
-  ) {
-
-  }
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     LayoutComponent.auth=false;
     this.getUsuarioPorId();
-
   }
 
   getUsuarioPorId(){
     this.usuarioService.getVendedor(Number(sessionStorage.getItem('idUsuario'))).subscribe((data:any) => {
       this.dataSource = data;
-      this.first_name = this.dataSource?.['nombre'].split(" ");
-      this.last_name = this.dataSource?.['apellido'].split(" ");
     });
   }
-  
 
   mostrarDatos(){
     console.log(this.dataSource);
@@ -59,18 +50,4 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-
-
-  /*Pruebas*/
-    /*cargarDatos() {
-    this.servicioDatos.disparadorDeDatos.subscribe(
-      (data : any) => {
-        console.log('recibiendo data ', data?.data);
-        this.vendedor = data?.data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }*/
 }

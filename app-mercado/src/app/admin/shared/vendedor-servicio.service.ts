@@ -13,8 +13,25 @@ export class VendedorServicioService {
   
   constructor(private http: HttpClient) { }
 
+  getVendedores(){
+    return this.http.get<Vendedor[]>(`${this.apiBase}/vendedores`);
+  }
+  
+  /*?*/
   delete(id: number) {
-    return this.http.delete(`${this.apiBase}/puestos/${id}`);
+    return this.http.delete(`${this.apiBase}/vendedores/${id}`);
+  }
+
+  getVendedorPorPuestoId(id: number){
+    return this.http.get<Vendedor>(`${this.apiBase}/vendedores/by-puesto/${id}`);
+  }
+
+  get(id: number) {
+    return this.http.get(`${this.apiBase}/vendedores/${id}`);
+  }
+
+  update(vendedor: Vendedor) {
+    return this.http.put(`${this.apiBase}/vendedores`, vendedor);
   }
 
 }

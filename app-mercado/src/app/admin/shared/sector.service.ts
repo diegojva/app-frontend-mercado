@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Sector } from './sector.mode';
+import { Sector } from './sector.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,9 @@ export class SectorService {
   }
   get(id: number) {
     return this.http.get(`${this.apiBase}/sectores/${id}`);
+  }
+  update(sector: Sector) {
+    return this.http.put(`${this.apiBase}/sectores`, sector);
   }
 
 }

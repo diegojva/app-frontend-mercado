@@ -15,9 +15,8 @@ import { Router } from '@angular/router';
 })
 export class ListaPuestosComponent implements OnInit {
 
-
-  private id :number;
-  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'sector','acciones'];
+  //private id :number;
+  displayedColumns: string[] = ['id', 'nombre', 'sector', 'estado','acciones'];
   dataSource: MatTableDataSource<Puesto>;
   dataSourceVendedor: MatTableDataSource<Vendedor>;
 

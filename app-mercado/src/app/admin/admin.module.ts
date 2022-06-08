@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MaterialModule } from '../material/material.module';
 import { MatSelectModule } from '@angular/material/select';
 
+
 import { ListaPuestosComponent } from './puestos/lista-puestos/lista-puestos.component';
 import { NuevoPuestoComponent } from './puestos/nuevo-puesto/nuevo-puesto.component';
 import { FormPuestoComponent } from './shared/form-puesto/form-puesto.component';
@@ -19,8 +20,12 @@ import { EditarProductoComponent } from './productos/editar-producto/editar-prod
 import { NuevoSectorComponent } from './sectores/nuevo-sector/nuevo-sector.component';
 import { FormSectorComponent } from './shared/form-sector/form-sector.component';
 import { ListaUnidadesMedidasComponent } from './unidad-medida/lista-unidades-medidas/lista-unidades-medidas.component';
-
-
+import { EditarPuestoComponent } from './puestos/editar-puesto/editar-puesto.component';
+import { ListaPedidosComponent } from './pedidos/lista-pedidos/lista-pedidos.component';
+import { DetallePedidosAdmComponent } from './pedidos/detalle-pedidos-adm/detalle-pedidos-adm.component';
+import { EditarPedidoComponent } from './pedidos/editar-pedido/editar-pedido.component';
+import { ListMercadosVendedorComponent } from './mercados/list-mercados-vendedor/list-mercados-vendedor.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -37,8 +42,11 @@ import { ListaUnidadesMedidasComponent } from './unidad-medida/lista-unidades-me
     NuevoSectorComponent,
     FormSectorComponent,
     ListaUnidadesMedidasComponent,
-
-
+    EditarPuestoComponent,
+    ListaPedidosComponent,
+    DetallePedidosAdmComponent,
+    EditarPedidoComponent,
+    ListMercadosVendedorComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +56,8 @@ import { ListaUnidadesMedidasComponent } from './unidad-medida/lista-unidades-me
     MatSelectModule,
     FormsModule,
     MatChipsModule,
+    NgxSpinnerModule
+    
   ],
   exports: [
 

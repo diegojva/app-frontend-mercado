@@ -14,12 +14,13 @@ export class FormSesionComponent implements OnInit {
 
   public auth: boolean = LayoutComponent.auth;
   form: FormGroup;
+  captcha: string;
+  //ok : boolean = false;
 
   @Input() usuario: Usuario = new Usuario();
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   
   constructor(
-    private loginService: LoginService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -33,14 +34,23 @@ export class FormSesionComponent implements OnInit {
           Validators.maxLength(30),
         ],
       ],
-      password: ['', [Validators.required,  Validators.minLength(8),
-        Validators.maxLength(50),]],
+      password: ['', [Validators.required,  Validators.minLength(8),Validators.maxLength(50),]],
     });
 
   }
 
   save() {
-    this.onSubmit.emit(this.form.value);
+    if(this.captcha==null){
+      //this.form.invalid;
+      alert('Debes completar el captcha');
+    }else {
+      this.onSubmit.emit(this.form.value);
+    }
+
   }
 
+  resolved(captchaResponse: string){
+    this.captcha = captchaResponse;
+  }
+  
 }

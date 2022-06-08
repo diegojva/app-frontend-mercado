@@ -1,61 +1,59 @@
 <div class="row">
-    <div class="col-md-offset-3 mx-auto">
-      <form
-        (ngSubmit)="registrar()"
-        autocomplete="off"
-        [formGroup]="form"
-        #frmLibro="ngForm"
+  <div class="col-md-offset-3 mx-auto">
+    <form
+      (ngSubmit)="registrar()"
+      autocomplete="off"
+      [formGroup]="form"
+      #frmLibro="ngForm"
+    >
+      <br />
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" row="5" />
+
+        <mat-error *ngIf="form.hasError('required', 'nombre')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+          Debe tener al menos 11 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+          Debe tener 30 caracteres como máximo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" row="5" />
+
+        <mat-error *ngIf="form.hasError('required', 'descripcion')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.hasError('minlength', 'descripcion')">
+          Debe tener al menos 11 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.hasError('maxlength', 'descripcion')">
+          Debe tener 255 caracteres como máximo
+        </mat-error>
+      </mat-form-field>
+
+      <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
+
+      <br /><br />
+      <button type="button" mat-button routerLink="/admin/vendedor/puestos/:id">
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="ms-2"
+        [disabled]="frmLibro.invalid"
       >
-
-        <br/>
-  
-        <mat-form-field appearance="outline" class="d-block">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="nombre" row="5"  />
-  
-          <mat-error *ngIf="form.hasError('required', 'nombre')">
-            Este campo es obligatorio
-          </mat-error>
-          <mat-error *ngIf="form.hasError('minlength', 'nombre')">
-            Debe tener al menos 11 caracteres
-          </mat-error>
-          <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
-            Debe tener 255 caracteres como máximo
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="d-block">
-            <mat-label>Descripción</mat-label>
-            <input matInput formControlName="descripcion" row="5"  />
-    
-            <mat-error *ngIf="form.hasError('required', 'descripcion')">
-              Este campo es obligatorio
-            </mat-error>
-            <mat-error *ngIf="form.hasError('minlength', 'descripcion')">
-              Debe tener al menos 11 caracteres
-            </mat-error>
-            <mat-error *ngIf="form.hasError('maxlength', 'descripcion')">
-              Debe tener 255 caracteres como máximo
-            </mat-error>
-          </mat-form-field>
-
-        <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
-
-       <br /><br />
-        <button type="button" mat-button routerLink="/admin/vendedor/puestos/:id">
-          Cancelar
-        </button>
-  
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="ms-2"
-          [disabled]="frmLibro.invalid"
-        >
-          Guardar
-        </button>
-      </form>
-    </div>
+        Guardar
+      </button>
+    </form>
   </div>
-  
+</div>

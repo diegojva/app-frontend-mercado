@@ -15,4 +15,16 @@ export class UnidadMedidaService {
   getUnidadesMedidas(){
     return this.http.get<UnidadMedida[]>(`${this.apiBase}/unidades_medidas`);
   }
+  create(unidadMedida: UnidadMedida) {
+    return this.http.post(`${this.apiBase}/unidades_medidas`, unidadMedida);
+  }
+  get(id: number){
+    return this.http.get<UnidadMedida[]>(`${this.apiBase}/unidades_medidas/${id}`);
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.apiBase}/unidades_medidas/${id}`);
+  }
+  update(unidadMedida: UnidadMedida) {
+    return this.http.put(`${this.apiBase}/unidades_medidas`, unidadMedida);
+  }
 }

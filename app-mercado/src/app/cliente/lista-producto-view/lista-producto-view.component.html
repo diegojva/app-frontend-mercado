@@ -1,0 +1,337 @@
+<h3 class="fw-bold">Lista de Productos de '{{nombrePuesto}}' del Mercado '{{nombreMercado}}'</h3>
+
+<!---->
+
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar producto" />
+  </mat-form-field>
+</div>
+
+<div class="container-table">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" class="w-100">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="medida">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>U. Medida</th>
+      <td mat-cell *matCellDef="let element">{{ element.unidadMedida.descripcion }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="disponible">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad disponible</th>
+      <td mat-cell *matCellDef="let element" > {{element.stock}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+      <td mat-cell *matCellDef="let element">S/{{ element.precio}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acción</th>
+
+      <td mat-cell *matCellDef="let element">
+
+        <button mat-button title="Añadir" alt="Añadir" color="warn" name="btn-plus"
+          (click)="agregarProductoDeLista(element)">
+          Añadir
+        </button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<!---->
+<br>
+<h3 class="fw-bold">Genera tu pedido </h3>
+
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="save()" #frmOrder="ngForm">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mi carrito de productos
+        </mat-panel-title>
+        <mat-panel-description>
+          Digita el producto y cantidad &nbsp;
+          <mat-icon>arrow_drop_down</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Producto</mat-label>
+        <input type="text" placeholder="Producto" matInput [matAutocomplete]="autoProducto"
+          [formControl]="myControlProducto" formControlName="producto" ng-required="true" />
+
+        <mat-autocomplete #autoProducto="matAutocomplete" [displayWith]="mostrarProducto">
+          <mat-option *ngFor="let p of productosFiltrados$ | async" [value]="p">
+            {{ p.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" placeholder="Cantidad" formControlName="quantity" ng-required="true" />
+
+        <mat-error *ngIf="form.hasError('required', 'quantity')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.hasError('min', 'quantity')">
+          El monto tiene que ser mayor que 0
+        </mat-error>
+      </mat-form-field>
+
+      <button  mat-raised-button color="warn" type="button" (click)="agregarProducto()"
+        [disabled]="myControlProducto.invalid">
+        Agregar producto
+      </button>
+
+      <br><br>
+      <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceOrden">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+          </ng-container>
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.producto.nombre}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"> S/{{element.producto.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="subtotal">
+            <th mat-header-cell *matHeaderCellDef> SubTotal </th>
+            <td mat-cell *matCellDef="let element"> S/{{element.quantity*element.producto.precio}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element; let i = index"> 
+              <button class="btn-carrito-pedido" mat-raised-button color="warn" type="button" (click)="removerProducto(i)">
+                Eliminar
+              </button>
+              &nbsp;
+              <button class="btn-carrito-pedido" mat-raised-button color="warn" type="button" (click)="removerCantidadProducto(i)">
+                -
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsOrden; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsOrden;"></tr>
+        </table>
+      </div>
+      <br>
+      <p class="price"><strong>Total: S/{{previewTotal}} </strong></p>
+      <!--<div class="list" *ngFor="let old of orderLines; let i = index">
+        <ul>
+          <li><strong>Producto: </strong> &nbsp; {{ old.producto.nombre }} &nbsp; <strong>Precio:
+            </strong> &nbsp;S/{{old.producto.precio }} &nbsp;<strong>Cantidad: </strong> &nbsp; {{ old.quantity }}
+            &nbsp;
+            <button class="btn-carrito-pedido" mat-raised-button color="warn" type="button" (click)="removerProducto(i)">
+              Eliminar
+            </button>
+            &nbsp;
+            <button class="btn-carrito-pedido" mat-raised-button color="warn" type="button" (click)="removerCantidadProducto(i)">
+              -
+            </button><br/>
+            <mat-divider></mat-divider>
+          </li>
+        </ul>
+      </div>-->
+
+      <!--<div>
+      <ul class="list-group" *ngFor="let old of orderLines; let i = index">
+        <li class="list-group-item list-group-item-secondary"> <strong>Producto: </strong> &nbsp; {{ old.producto.nombre }} &nbsp; <strong>Precio:
+          </strong> &nbsp;{{
+          old.producto.precio }} &nbsp;<strong>Cantidad: </strong> &nbsp; {{ old.quantity }}
+        </li>  
+        <span class="example-spacer"></span>
+      </ul>
+    </div>-->
+
+
+      <!--<div *ngFor="let old of orderLines; let i = index">
+    <mat-toolbar>
+      <strong>Producto: </strong> &nbsp; {{ old.producto.nombre }} &nbsp; <strong>Precio: </strong> &nbsp;{{
+      old.producto.precio }} &nbsp;<strong>Cantidad: </strong> &nbsp; {{ old.quantity }}
+      <span class="example-spacer"></span>
+      &nbsp;
+      <button mat-raised-button color="warn" type="button" (click)="removerProducto(i)">
+        Eliminar
+      </button>
+      &nbsp;
+      <button mat-raised-button color="warn" type="button" (click)="removerCantidadProducto(i)">
+        -
+      </button>
+    </mat-toolbar>
+  </div>-->
+
+      <mat-action-row>
+        <button mat-button color="warn" type="button" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Método de pago
+        </mat-panel-title>
+        <mat-panel-description>
+          Monto a pagar y persona que pagará
+          <mat-icon>arrow_drop_down</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>¿Con cuánto pagará?</mat-label>
+        <input matInput type="number" placeholder="S/" formControlName="montoAPagar" ng-required="true" />
+
+        <mat-error *ngIf="form.hasError('maxlength', 'montoAPagar')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="form.hasError('min', 'montoAPagar')">
+          El monto tiene que ser mayor que 0
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Nombre completo de la persona que pagará</mat-label>
+        <input matInput type="text" placeholder="Ex. Juan Solveti Riquelme" formControlName="nombreCompleto"
+          ng-required="true" />
+
+        <mat-error *ngIf="form.hasError('maxlength', 'nombreCompleto')">
+          El nombre debe tener como máximo 80 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.hasError('minlength', 'nombreCompleto')">
+          El nombre debe tener como minímo 10 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.hasError('required', 'nombreCompleto')">
+          Este campo es obligatorio
+        </mat-error>
+
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Anterior</button>
+        <button mat-button color="warn" (click)="nextStep()">Generar pedido</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</form>
+<!---CARRITO-->
+<!--
+<h3 class="fw-bold" >Mi carrito de productos</h3>
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        autocomplete="off"
+        [formGroup]="form"
+        (ngSubmit)="save()"
+        #frmOrder="ngForm"
+      >
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Producto</mat-label>
+          <input
+            type="text"
+            placeholder="Producto"
+            matInput
+            [matAutocomplete]="autoProducto"
+            [formControl]="myControlProducto"
+            formControlName="producto"
+            ng-required="true"
+          />
+  
+          <mat-autocomplete
+            #autoProducto="matAutocomplete"
+            [displayWith]="mostrarProducto"
+          >
+            <mat-option *ngFor="let p of productosFiltrados$ | async" [value]="p">
+              {{ p.nombre }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Cantidad</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="Cantidad"
+            formControlName="quantity"
+            ng-required="true"
+          />
+  
+          <mat-error *ngIf="form.hasError('maxlength', 'quantity')">
+            Este campo es obligatorio
+          </mat-error>
+        </mat-form-field>
+  
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="agregarProducto()"
+          [disabled]="myControlProducto.invalid"
+        >
+          Agregar producto al detalle
+        </button>
+        &nbsp;
+        <button
+          mat-raised-button
+          color="warn"
+          type="submit"
+          class="ms-2"
+          
+        >
+          Guardar
+        </button>
+
+        <br><br>
+        
+        <mat-toolbar *ngFor="let old of orderLines; let i = index">
+         <strong>Producto: </strong> &nbsp; {{ old.producto.nombre }} &nbsp; <strong>Precio: </strong> &nbsp;{{ old.producto.precio }} &nbsp;<strong>Cantidad: </strong> &nbsp; {{ old.quantity }}
+          <span class="example-spacer"></span>
+          &nbsp;
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="removerProducto(i)"
+          >
+            Eliminar
+          </button>
+        </mat-toolbar>
+      </form>
+    </div>
+  </div>-->

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Puesto } from '../../shared/puesto.model';
-import { Sector } from '../../shared/sector.mode';
+import { Sector } from '../../shared/sector.model';
 import { SectorService } from '../../shared/sector.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { SectorService } from '../../shared/sector.service';
 })
 export class ListaSectoresComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nombre', 'descripcion','acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'descripcion'];
   dataSource: MatTableDataSource<Sector>;
 
   constructor(private sectorService:SectorService) { }
@@ -30,14 +30,4 @@ export class ListaSectoresComponent implements OnInit {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  eliminar(id: number) {
-    const ok = confirm('¿Estás seguro de eliminar el sector?');
-    if (ok) {
-      this.sectorService.delete(id).subscribe(() => {
-        this.obtenerSectores();
-      }, erro=>{
-        alert('No puedes eliminar el sector porque existen puestos asociados a el.')
-      });
-    }
-  }
 }

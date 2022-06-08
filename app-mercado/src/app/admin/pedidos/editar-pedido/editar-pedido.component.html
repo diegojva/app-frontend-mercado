@@ -1,0 +1,68 @@
+<div class="row">
+  <h3>ASIGNA UN DESPACHADOR</h3>
+  <h4>  <strong>Despachador de este pedido =></strong> {{orden?.despachador?.nombre}}, {{orden?.despachador?.apellido}}</h4>
+  <div class="col-md-offset-3 mx-auto">
+    <form
+      (ngSubmit)="actualizarEstadoPedido(form.value)"
+      autocomplete="off"
+      [formGroup]="form"
+      #frmLibro="ngForm"
+    >
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>id</mat-label>
+        <input matInput formControlName="id" row="5"  readonly/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>cliente</mat-label>
+        <input matInput formControlName="cliente" row="5" readonly/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="d-block">
+        <mat-label>estado</mat-label>
+        <input matInput formControlName="estado" row="5" readonly/>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" >
+        <mat-label>Despachadores hoy</mat-label>
+        <mat-select formControlName="despachador" [(value)]="selected">
+          <mat-option  *ngFor="let d of despachadores" [value]="d">
+            <h5 style="text-transform: uppercase; margin: auto;">{{d.nombre}} - {{d.estado}}</h5>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p><strong>Despachador escogido</strong></p>
+      <p>- Nombre: {{selected.nombre}}</p>
+      <p>- Apellido: {{selected.apellido}}</p> 
+      <p>- DNI: {{selected.dni}}</p>
+      <p>- Estado Despachador: {{selected.estado}}</p>
+      <p>- Estado Pedido: {{orden?.estado}}</p>
+
+      <!--<mat-form-field appearance="fill" >
+        <mat-select formControlName="estado"  >
+          <mat-option value="ATENDIDO" >ATENDIDO</mat-option>
+          <mat-option value="SIN ATENDER">SIN ATENDER</mat-option>
+          <mat-option value="CANCELADO">CANCELADO</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.hasError('required', 'estado')">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>-->
+
+      <button type="button" mat-button routerLink="/admin/vendedor/pedidos/{{idPuesto}}">
+        Cancelar
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="ms-2"
+        [disabled]="frmLibro.invalid"
+      >
+        Guardar
+      </button>
+    </form>
+  </div>
+</div>

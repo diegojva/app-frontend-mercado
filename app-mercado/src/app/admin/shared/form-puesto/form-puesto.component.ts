@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { MarketService } from 'src/app/home/shared/market.service';
 import { Puesto } from '../puesto.model';
 import { PuestoService } from '../puesto.service';
-import { Sector } from '../sector.mode';
 import { SectorService } from '../sector.service';
 
 @Component({
@@ -12,20 +14,21 @@ import { SectorService } from '../sector.service';
 })
 export class FormPuestoComponent implements OnInit {
 
-  public sectores : Array<any> = [];
-  msg='';
+  sectores : Array<any> = [];
+  mercados : Array<any> = [];
+  enviado : boolean;
 
-  form: FormGroup;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  value = 50;
 
-  @Input() vendedorNew: Puesto = new Puesto();
+  @Input() set puesto (p:Puesto){
+
+    this.form.patchValue(p);
+  }
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
-  constructor(private puestoService: PuestoService, private sectorService: SectorService,
-    private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-       
-    this.form = this.formBuilder.group({
+      form = this.formBuilder.group({
       nombre:[
         '',
         [
@@ -35,13 +38,29 @@ export class FormPuestoComponent implements OnInit {
         ],
       ],
       descripcion: ['', [Validators.required,  Validators.minLength(10), Validators.maxLength(150),]],
-      sector: ['']
+      sector: ['',[Validators.required]],
+      mercado: ['',[Validators.required]],
+      estado: ['',[Validators.required]],
     });
-    this.cargarSectores();
+
+
+  constructor(private puestoService: PuestoService,
+    private sectorService: SectorService,
+    private mercadoService: MarketService,
+    private formBuilder: FormBuilder) {
+      this.cargarSectores();
+      this.cargarMercados();
+     }
+
+  ngOnInit(): void {
   }
 
   registrar() {
-    this.onSubmit.emit(this.form.value);
+    this.enviado = true;
+    setTimeout(() => {
+      this.onSubmit.emit(this.form.value);
+      this.enviado = false;
+    }, 500);
   }
 
   cargarSectores(){
@@ -51,7 +70,17 @@ export class FormPuestoComponent implements OnInit {
         this.sectores.push(data);
       },
       (err: any)=> {
-        this.msg="";
+      }
+    );
+  }
+
+  cargarMercados(){
+    this.mercadoService.getAllMercados().subscribe(
+      (data:any)=>{
+
+        this.mercados.push(data);
+      },
+      (error: any)=> {
       }
     );
   }

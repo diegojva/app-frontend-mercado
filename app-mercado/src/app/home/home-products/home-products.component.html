@@ -1,0 +1,38 @@
+<div id="btn-filter">
+  <h4>Filtrar producto por &nbsp;</h4>
+  <mat-form-field appearance="fill">
+    <mat-label> Mercado</mat-label>
+    <mat-select [ngModel]="idMercado" (ngModelChange)="onChange($event)">
+      <mat-option *ngFor="let item of datosMercados" [value]="item.id">
+        {{ item.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let item of datos">
+      <mat-card class="example-card">
+        <mat-card-title style="text-transform: uppercase; font-size: 1.5em">{{
+          item.nombre
+        }}</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+          <br>
+          <img mat-card-image src="{{item.foto}}" height="360px" style="width: calc(100% + 32 px ); clear:both; object-fit: contain;">
+          <p><strong>Precio:</strong> S/{{ item.precio }}</p>
+          <p><strong>Sector:</strong> {{ item.sector.nombre }}</p>
+          <p><strong>Mercado:</strong> {{ item.puesto.mercado.nombre }}</p>
+          <p><strong>Vendedor: </strong>{{ item.puesto.vendedor.nombre }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="verificarAcceso(item.puesto.id)" mat-button>
+            Comprar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

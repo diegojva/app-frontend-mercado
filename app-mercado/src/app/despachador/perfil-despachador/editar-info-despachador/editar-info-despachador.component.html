@@ -1,0 +1,29 @@
+<div class="row">
+    <h3 style="font-weight: bold;">ACTUALIZA EL ESTADO</h3>
+    <h4 >Estado actual: {{despachador?.estado}}</h4>
+    <div class="col-md-offset-3 mx-auto">
+        <form (ngSubmit)="actualizarDespachador(form.value)" autocomplete="off" [formGroup]="form" #frmLibro="ngForm">
+
+
+            <mat-form-field appearance="fill">
+                <mat-select formControlName="estado">
+                    <mat-option value="DISPONIBLE">DISPONIBLE</mat-option>
+                    <mat-option value="NO DISPONIBLE">NO DISPONIBLE</mat-option>
+                    <mat-option value="OCUPADO">OCUPADO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.hasError('required', 'estado')">
+                    Este campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <br>
+
+            <button type="button" mat-button routerLink="/despachador">
+                Cancelar
+            </button>
+
+            <button mat-raised-button color="warn" type="submit" class="ms-2" [disabled]="frmLibro.invalid">
+                Guardar
+            </button>
+        </form>
+    </div>
+</div>

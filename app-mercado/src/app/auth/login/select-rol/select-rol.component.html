@@ -1,0 +1,20 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+       <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <mat-form-field appearance="fill">
+        <mat-label >Selecciona el número... </mat-label>
+        <mat-select (onChange)="onChange($event.value)" >
+          <mat-option  [value]="rol.nombre" *ngFor="let rol of roles; let i = index">
+            {{rol.id}} 
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Entrar como...
+      </button>
+    </div>
+  
+  </mat-drawer-container>

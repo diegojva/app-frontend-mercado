@@ -25,7 +25,7 @@ export class ListaUnidadesMedidasComponent implements OnInit {
 
   getUnidadesMedidas(){
     this.unidadMedidaService.getUnidadesMedidas().subscribe((data:any) => {
-      this.dataSource = data;
+      this.dataSource = new MatTableDataSource(data);
     });
   }
   applyFilter(value: string) {

@@ -1,0 +1,68 @@
+<h3 class="fw-bold">Mis pedidos</h3>
+
+<!---->
+
+<div class="example-header">
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Buscar pedido"
+    />
+  </mat-form-field>
+</div>
+
+<div class="container-table">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8"
+    class="w-100"
+  >
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID_PEDIDO</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.fecha_pedido.replace('T'," ").split('.')[0] }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TOTAL</th>
+      <td mat-cell *matCellDef="let element">S/{{ element.total }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ESTADO</th>
+      <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef>ACCIÓN</th>
+
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-button
+          title="Detalle"
+          alt="Detalle"
+          color="warn"
+          [routerLink]="[
+            '/cliente/mercados/puestos/pedidos',
+            element.id,
+            'detalles'
+          ]"
+        >
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

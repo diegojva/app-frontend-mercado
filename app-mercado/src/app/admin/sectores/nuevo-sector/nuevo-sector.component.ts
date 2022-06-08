@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Sector } from '../../shared/sector.mode';
+import { Sector } from '../../shared/sector.model';
 import { SectorService } from '../../shared/sector.service';
 
 @Component({

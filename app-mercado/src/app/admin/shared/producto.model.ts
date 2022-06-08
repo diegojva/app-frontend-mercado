@@ -1,5 +1,5 @@
 import { Puesto } from "./puesto.model";
-import { Sector } from "./sector.mode";
+import { Sector } from "./sector.model";
 import { UnidadMedida } from "./unidadMedida.model";
 
 export class Producto {
@@ -9,5 +9,6 @@ export class Producto {
     stock: number;
     puesto: Puesto;
     sector: Sector;
-    unidadMedida: UnidadMedida;
+    foto: string;
+    unidadMedida?: UnidadMedida;
 }

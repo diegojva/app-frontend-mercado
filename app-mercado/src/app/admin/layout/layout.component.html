@@ -1,51 +1,65 @@
 <mat-toolbar color="primary">
 
   <button id="ocultar" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon>more_vert</mat-icon>
+    <mat-icon>
+      <mat-icon>menu</mat-icon>
+    </mat-icon>
   </button>
-  <mat-menu  #menu="matMenu">
-    <button style="font-size:13px;" mat-menu-item routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2">
-      <mat-icon  >pets icon</mat-icon>&nbsp;Puestos
+
+  <span>Vendedor</span>
+
+  <mat-menu #menu="matMenu">
+    <button style="font-size:12px;" mat-menu-item routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2">
+      <mat-icon style="display:none;">pets icon</mat-icon>&nbsp;Puestos
       <br>
     </button>
-    <button style="font-size:13px;"mat-menu-item routerLink="/admin/vendedor/sectores" class="ms-2">
-      <mat-icon >receipt icon</mat-icon>&nbsp;Sectores
+    <button style="font-size:12px;" mat-menu-item routerLink="/admin/vendedor/mercados" class="ms-2">
+      <mat-icon style="display:none;">pets icon</mat-icon>&nbsp;Mercados
       <br>
     </button>
-    <button style="font-size:13px;"mat-menu-item routerLink="/admin/vendedor/unidades-medidas" class="ms-2">
-      <mat-icon>receipt icon</mat-icon>&nbsp;Unidades Medidas
+    <button style="font-size:12px;" mat-menu-item routerLink="/admin/vendedor/sectores" class="ms-2">
+      <mat-icon style="display:none;">receipt icon</mat-icon>&nbsp;Sectores
+      <br>
     </button>
+    <button style="font-size:12px;" mat-menu-item routerLink="/admin/vendedor/unidades-medidas" class="ms-2">
+      <mat-icon style="display:none;">receipt icon</mat-icon>&nbsp;Unidades Medidas
+    </button>
+
   </mat-menu>
 
-  <span id="title-vendedor">Vendedor</span>
+  <!--<span id="title-vendedor">Vendedor</span>-->
 
   <div id="mostrar">
     <button mat-button routerLink="/admin/vendedor/puestos/+{{id}}" class="ms-2">
-      <mat-icon id="icon-mostrar">pets icon</mat-icon>&nbsp;Puestos
+      <mat-icon id="icon-mostrar">style</mat-icon>&nbsp;Puestos
+    </button>
+    <button mat-button routerLink="/admin/vendedor/mercados" class="ms-2">
+      <mat-icon id="icon-mostrar">store_mall_directory</mat-icon>&nbsp;Mercados
     </button>
     <button mat-button routerLink="/admin/vendedor/sectores" class="ms-2">
-      <mat-icon id="icon-mostrar">receipt icon</mat-icon>&nbsp;Sectores
+      <mat-icon id="icon-mostrar">view_module</mat-icon>&nbsp;Sectores
     </button>
     <button mat-button routerLink="/admin/vendedor/unidades-medidas" class="ms-2">
-      <mat-icon id="icon-mostrar">receipt icon</mat-icon>&nbsp;Unidades Medidas
+      <mat-icon id="icon-mostrar">explore</mat-icon>&nbsp;Unidades Medidas
     </button>
+
   </div>
 
   <span class="spacer"></span>
 
-
-
-  <button id="second-menu" mat-button [matMenuTriggerFor]="menu1" style="text-transform: uppercase;">
-    {{first_name?.['0']}} {{last_name?.['0']}} <mat-icon>account_circle</mat-icon> 
+  <button mat-button [matMenuTriggerFor]="menu2" style="text-transform: uppercase;">
+    {{dataSource?.nombre}} <mat-icon>account_circle</mat-icon>
   </button>
 
-  <mat-menu #menu1="matMenu">
+  <mat-menu #menu2="matMenu">
     <button mat-menu-item (click)="signOut()">
       <mat-icon>logout</mat-icon> Cerrar sesión
     </button>
 
+    <button mat-menu-item routerLink="/admin/reportes">
+      <mat-icon>report</mat-icon> Ayuda
+    </button>
   </mat-menu>
-
 </mat-toolbar>
 
 <div class="container p-5">

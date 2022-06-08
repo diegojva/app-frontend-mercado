@@ -1,0 +1,25 @@
+p {
+    font-weight: bold;
+    padding: 0.5em;
+}
+.new-rol:hover{
+    background: rgb(207, 206, 206);
+    transition:0.5s;
+}
+table th, td {
+    margin: auto;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    table th  {
+        padding: 0.5em;
+        font-size:11px;
+    }
+    table td {
+        padding: 0.5em;
+        font-size:11px;
+    }
+    #title-puestos{
+        font-size: 11px;
+    }
+}

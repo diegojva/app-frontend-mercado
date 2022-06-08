@@ -1,0 +1,4 @@
+<h3 class="fw-bold" style="text-transform: uppercase;">{{vendedor?.nombre}}, actualiza tu puesto </h3>
+<h5>  <strong>Sector Actual =></strong> {{nombreSector}}</h5>
+<h5>  <strong>Mercado Actual =></strong> {{nombreMercado}}</h5>
+<app-form-puesto (onSubmit)="updatePuesto($event)" [puesto]="puesto"></app-form-puesto>

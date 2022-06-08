@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-md-offset-3 mx-auto">
+      <form
+        (ngSubmit)="registrar()"
+        autocomplete="off"
+        [formGroup]="form"
+        #frmLibro="ngForm"
+      >
+        <br />
+  
+        <mat-form-field appearance="outline" class="d-block">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" row="5" />
+  
+          <mat-error *ngIf="form.hasError('required', 'nombre')">
+            Este campo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.hasError('minlength', 'nombre')">
+            Debe tener al menos 5 caracteres
+          </mat-error>
+          <mat-error *ngIf="form.hasError('maxlength', 'nombre')">
+            Debe tener 25 caracteres como máximo
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" row="5" />
+    
+            <mat-error *ngIf="form.hasError('required', 'apellido')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'apellido')">
+              Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'apellido')">
+              Debe tener 50 caracteres como máximo
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" row="5" />
+    
+            <mat-error *ngIf="form.hasError('required', 'username')">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('minlength', 'username')">
+              Debe tener al menos 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'username')">
+              Debe tener 30 caracteres como máximo
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="d-block">
+            <mat-label>DNI</mat-label>
+            <input matInput type="text" placeholder="DNI" formControlName="dni" />
+
+            <mat-error *ngIf="form.hasError('required', 'dni')">
+                Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="form.hasError('maxlength', 'dni')">
+                Debe tener 8 caracteres como máximo
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Estado</mat-label>
+          <mat-select disableRipple formControlName="estado">
+            <mat-option value="ACTIVO">ACTIVO</mat-option>
+            <mat-option value="DE BAJA">DE BAJA</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <br />
+
+        <!--<mat-form-field appearance="fill" *ngFor="let rol of roles; let i = index">
+          <mat-label>Roles</mat-label>
+          <mat-select formControlName="roles" multiple>
+            <mat-option *ngFor="let r of rol" [value]="r">{{r.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>-->
+
+        <!--<mat-form-field appearance="fill" *ngFor="let rol of roles; let i = index">
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roles">
+          <mat-option *ngFor="let r of rol" [value]="r">
+            {{ r.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>-->
+  
+        <!--<a routerLink="/auth/registrar">¿Sin cuenta? Registrate aquí</a>-->
+  
+        <br />
+        <button type="button" mat-button routerLink="/master">
+          Cancelar
+        </button>
+  
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ms-2"
+          [disabled]="frmLibro.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+  

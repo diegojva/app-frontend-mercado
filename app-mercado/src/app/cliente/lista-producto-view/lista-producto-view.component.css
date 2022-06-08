@@ -1,0 +1,146 @@
+table th, td {
+    margin: auto;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    table th  {
+        padding: 0.5em;
+        font-size:11px;
+    }
+    table td {
+        padding: 0.5em;
+        font-size:11px;
+    }
+    #title-puestos{
+        font-size: 11px;
+    }
+    .list {
+      width:100%;
+      display:table;
+      margin:1em;
+    }
+   
+    .list ul {
+      display:table-row;
+    }
+    
+    .list ul:first-child li {
+      
+      background-color:rgb(248, 245, 245);
+      color:#000000;
+    }
+    
+    .list ul > li {
+      display:table-cell;
+      padding:.5em 1em;
+    }
+    .btn-carrito-pedido{
+      border-radius:7%;
+      font-size:0.875;
+      word-wrap: break-word;
+      width: 100px; 
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    mat-panel-title,mat-panel-description{
+      white-space: wrap; 
+      text-overflow: ellipsis;
+      font-size: 2.2vw;
+    }
+    mat-divider {
+      display: none;
+    }
+    .columns {
+      width: 100%;
+    }
+
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+table {
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.columns {
+  width: 100%;
+  padding: 8px;
+  margin: 0 auto
+}
+
+.price {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+  background-color: #111;
+  color: white;
+  font-size: 25px;
+}
+
+.price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+.price .grey {
+  background-color: #eee;
+  font-size: 20px;
+}
+h3{
+  padding:0;
+  margin:0;
+}
+.container-table{
+  width: 100%;
+overflow-x: auto;
+}
+
+.example-container {
+  height: 270px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
+.price {
+  text-align: center;
+  margin: auto;
+}

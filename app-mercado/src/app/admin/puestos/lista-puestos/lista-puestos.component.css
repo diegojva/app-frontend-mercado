@@ -1,13 +1,17 @@
+table th, td {
+    margin: auto;
+    text-align: center;
+}
 @media (max-width: 768px) {
     table th  {
         padding: 0.5em;
-        font-size:10px;
+        font-size:11px;
     }
     table td {
         padding: 0.5em;
-        font-size:10px;
+        font-size:11px;
     }
     #title-puestos{
-        font-size: 10px;
+        font-size: 11px;
     }
 }

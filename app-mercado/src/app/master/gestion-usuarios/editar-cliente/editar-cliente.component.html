@@ -1,0 +1,3 @@
+<h3 class="fw-bold" style="text-transform: uppercase;" >Actualiza el usuario</h3>
+<div><h5 *ngFor="let rol of cliente?.roles">[{{rol?.nombre}}]</h5></div>
+<app-form-cliente (onSubmit)="updateCliente($event)" [cliente]="cliente"></app-form-cliente>
